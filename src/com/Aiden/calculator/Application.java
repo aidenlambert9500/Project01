@@ -1,3 +1,16 @@
+/*
+ * <h1>Application.java</h1>
+* <p>
+* This class is designed for processing calculations in Java .
+* It is part of Lab 1 Exercises A-E .
+* </p>
+*
+* <p><b>Submission Date:</b>July 4th, 2024</p>
+*
+* @author Aiden Lambert
+* @version 1.0
+*/
+
 package com.Aiden.calculator;
 
 import java.util.Scanner;
