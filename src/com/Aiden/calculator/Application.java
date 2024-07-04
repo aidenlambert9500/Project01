@@ -43,7 +43,7 @@ public class Application {
             Scanner scanner = new Scanner(System.in);
             
             while (true) {
-            	System.out.println("Enter operation (e.g., add, subtract, multiply, divide, pow, sqrt, log, log10, sin, cos, tan, factorial) or 'exit' to quit:");           
+            	System.out.println("Enter operation (e.g., add, subtract, multiply, divide, pow, sqrt, log, log10, sin, cos, tan, factorial, permutation, permutationWithoutRecursion) or 'exit' to quit:");           
 	            String operation = scanner.next();
 	            // Further processing based on operation
 	            // switch case to call different methods depending on the desired operation from the user
@@ -120,6 +120,20 @@ public class Application {
 	        		double numTan = Double.parseDouble(scanner.next());
 	        		System.out.println(tan(Math.toRadians(numTan)));
 	        		break;
+	        	case "permutation":
+	        		System.out.println("Enter an number of items:");
+	        		int items = Integer.parseInt(scanner.next());
+	        		System.out.println("Enter an number of items to select:");
+	        		int itemsSelected = Integer.parseInt(scanner.next());
+	        		System.out.println(permutation(items, itemsSelected));
+	        		break;
+	        	case "permutationwithoutrecursion":
+	        		System.out.println("Enter an number of items:");
+	        		int itemsWORecursion = Integer.parseInt(scanner.next());
+	        		System.out.println("Enter an number of items to select:");
+	        		int itemsSelectedWORecursion = Integer.parseInt(scanner.next());
+	        		System.out.println(permutationWithoutRecursion(itemsWORecursion, itemsSelectedWORecursion));
+	        		break;	
 	        	case "exit":
 	        		System.out.println("Program exited.");
 	        		scanner.close();
@@ -207,5 +221,35 @@ public class Application {
     public static double tan(double angleRadians) {
         return Math.tan(angleRadians);
     }
+    // Accepts two integers and returns the number of possible permutations. Throws an error if the number of items is negative or less than the number of items selected.
+    public static int permutation(int items, int itemsSelected) {
+    	if (items < 0) {
+    		throw new IllegalArgumentException("Number of items cannot be negative");
+    	}
+    	if (itemsSelected > items) {
+    		throw new IllegalArgumentException("Items selected cannot be greater than number of items");
+    	}
+    	if (itemsSelected == 0) {
+            return 1; // Base case: 0 items selected, only 1 way (empty selection)
+        } else {
+            return items * permutation(items - 1, itemsSelected - 1);
+        }
+    }
+    // Accepts two integers and returns the number of possible permutations without using recursion. Throws an error if the number of items is negative or less than the number of items selected.
+
+    public static int permutationWithoutRecursion(int items, int itemsSelected) {
+    	if (items < 0) {
+    		throw new IllegalArgumentException("Number of items cannot be negative");
+    	}
+    	if (itemsSelected > items) {
+    		throw new IllegalArgumentException("Items selected cannot be greater than number of items");
+    	}
+    	int result = 1;
+    	for(int i = 0; i < itemsSelected; i++) {
+    		result *= (items - i);
+    	}
+    	return result;
+    }
+
 }
 
